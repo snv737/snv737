@@ -96,3 +96,104 @@ namespace MoneyConversion
         }
     }
 }
+
+
+
+<%@ Page Language="C#" AutoEventWireup="true"
+CodeBehind="WebForm1.aspx.cs" Inherits="Calen.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="hƩp://www.w3.org/1999/xhtml">
+<head runat="server">
+<Ɵtle></Ɵtle>
+</head>
+<body>
+<form id="form1" runat="server">
+<div>
+<asp:Calendar ID="Calendar1" runat="server"
+OnSelecƟonChanged="Calendar1_SelecƟonChanged"></asp:Calendar>
+<br />
+<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+<br />
+<asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+<br />
+<asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
+<br />
+<asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
+<br />
+<asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
+<br />
+<asp:BuƩon ID="BuƩon1" runat="server" OnClick="BuƩon1_Click"
+Text="Result" />
+<asp:BuƩon ID="BuƩon2" runat="server" OnClick="BuƩon2_Click"
+Text="Reset" />
+</div>
+</form>
+</body>
+</html>
+Logic:-
+using System;
+using System.CollecƟons.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace Calen
+{public parƟal class WebForm1 : System.Web.UI.Page
+{
+protected void Page_Load(object sender, EventArgs e)
+{
+}
+protected void Calendar1_SelecƟonChanged(object sender, EventArgs e)
+{
+Label1.Text = "Your Selected Date:" +
+Calendar1.SelectedDate.Date.ToString();
+}
+protected void BuƩon2_Click(object sender, EventArgs e)
+{
+Label1.Text = "";
+Label2.Text = "";
+Label3.Text = "";
+Label4.Text = "";
+Label5.Text = "";
+Calendar1.SelectedDates.Clear();
+}
+protected void BuƩon1_Click(object sender, EventArgs e)
+{
+Calendar1.FirstDayOfWeek = FirstDayOfWeek.Sunday;
+Calendar1.NextPrevFormat = NextPrevFormat.ShortMonth;
+Calendar1.TitleFormat = TitleFormat.Month;
+Label2.Text = "Todays Date" + Calendar1.TodaysDate.ToShortDateString();
+Label3.Text = "GanpaƟ VacaƟon Start: 19-09-2023";
+TimeSpan d = new DateTime(2023, 9, 19) - DateTime.Now;
+Label4.Text = "Days Remaining For GanpaƟ VacaƟon:" +
+d.Days.ToString();
+TimeSpan d1 = new DateTime(2023, 12, 31) - DateTime.Now;
+Label5.Text = "Days Remaining for New Year:" + d1.Days.ToString();
+if (Calendar1.SelectedDate.ToShortDateString() == "9-19-2023")
+Label3.Text = "<b>GanpaƟ FesƟval Start</b>";
+if (Calendar1.SelectedDate.ToShortDateString() == "9-27-2023")
+Label3.Text = "<b>GanpaƟ FesƟval End</b>";
+}
+protected void Calendar1_DayRender(object sender,
+System.Web.UI.WebControls.DayRenderEventArgs e)
+{
+if (e.Day.Date.Day == 5 && e.Day.Date.Month == 9)
+{
+e.Cell.BackColor = System.Drawing.Color.Yellow;
+Label lbl = new Label();
+lbl.Text = "<br>Teachers Day!";
+e.Cell.Controls.Add(lbl);
+}
+if (e.Day.Date.Day == 13 && e.Day.Date.Month == 9)
+{
+Calendar1.SelectedDate = new DateTime(2023, 9, 12);
+Calendar1.SelectedDates.SelectRange(Calendar1.SelectedDate,
+Calendar1.SelectedDate.AddDays(10));
+Label lbl1 = new Label();
+lbl1.Text = "<br>GanpaƟ!";
+e.Cell.Controls.Add(lbl1);
+}
+}
+}
+}
+Output:
