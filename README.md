@@ -1,72 +1,98 @@
-graph = {'A': set(['B', 'C']),
-         'B': set(['A', 'D', 'E']),
-         'C': set(['A', 'F']),
-         'D': set(['B']),
-         'E': set(['B', 'F']),
-         'F': set(['C', 'E'])
+using System;
+namespace factorialExample{
+    class programm{
+        static void Main(string[] args){
+            int number,fact=1,i;
+            Console.Write("enter any number");
+              number = int.Parse(Console.ReadLine());
+              for(i=1;i<=number;i++)
+              {
+                  fact=fact*i;
+              }
+              Console.WriteLine($"factorial of {number} is {fact}");
+              Console.ReadKey();
+              
+        }
+    }
 }
 
-# Implement BFS logic
-def bfs(start):
-    queue = [start]
-    levels = {}  # This dictionary keeps track of levels
-    levels[start] = 0  # Depth of start node is 0
-    visited = set([start])  # Initialize the visited set with the start node
-    
-    while queue:
-        node = queue.pop(0)
-        neighbours = graph[node]
-        
-        for neighbor in neighbours:
-            if neighbor not in visited:
-                queue.append(neighbor)
-                visited.add(neighbor)
-                levels[neighbor] = levels[node] + 1
-    
-    print(levels)  # Print graph levels
-    return visited
 
-print(bfs('A'))  # Print nodes visited by BFS
 
-# For finding all paths from start to goal using BFS
-def bfs_paths(graph, start, goal):
-    queue = [(start, [start])]
-    
-    while queue:
-        (vertex, path) = queue.pop(0)
-        
-        for next in graph[vertex] - set(path):
-            if next == goal:
-                yield path + [next]
-            else:
-                queue.append((next, path + [next]))
 
-# List all paths from 'A' to 'F'
-result = list(bfs_paths(graph, 'A', 'F'))
-print(result)  # [['A', 'C', 'F'], ['A', 'B', 'E', 'F']]
+using System;
 
-# For finding the shortest path using BFS
-def shortest_path(graph, start, goal):
-    try:
-        return next(bfs_paths(graph, start, goal))
-    except StopIteration:
-        return None
+class Program
+{
+    static void Main()
+    {
+        // Input from user
+        Console.Write("Enter a number: ");
+        double number = Convert.ToDouble(Console.ReadLine());
 
-# Find the shortest path from 'A' to 'F'
-result1 = shortest_path(graph, 'A', 'F')
-print(result1)  # ['A', 'C', 'F']
+        // Calculate the cube
+        double cube = Math.Pow(number, 3);
+
+        // Output the result
+        Console.WriteLine("The cube of {0} is {1}", number, cube);
+    }
+}
 
 
 
 
+using System;
+
+namespace FibonacciExample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Enter the number of Fibonacci terms: ");
+            int number = int.Parse(Console.ReadLine());
+
+            int n1 = 0, n2 = 1, n3;
+
+            Console.Write(n1 + " " + n2 + " ");  // print first two terms
+
+            for (int i = 2; i < number; i++)
+            {
+                n3 = n1 + n2;
+                Console.Write(n3 + " ");
+                n1 = n2;
+                n2 = n3;
+            }
+
+            Console.ReadKey();
+        }
+    }
+}
 
 
-def moveTower(height,fromPole, toPole, withPole):
-    if height >= 1:
-        moveTower(height-1,fromPole,withPole,toPole)
-        moveDisk(fromPole,toPole)
-        moveTower(height-1,withPole,toPole,fromPole)
 
-def moveDisk(fp,tp):
-    print("moving disk from",fp,"to",tp)
-moveTower(3,"A","B","C")
+
+using System;
+
+namespace MoneyConversion
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Hardcoded conversion rate (e.g., 1 USD = 74.50 INR)
+            double conversionRate = 74.50;
+
+            // Get the amount in USD
+            Console.Write("Enter the amount in USD: ");
+            double amountInUSD = double.Parse(Console.ReadLine());
+
+            // Convert to INR
+            double amountInINR = amountInUSD * conversionRate;
+
+            // Display the result
+            Console.WriteLine($"{amountInUSD} USD is equivalent to {amountInINR} INR.");
+            
+            Console.ReadKey();
+        }
+    }
+}
