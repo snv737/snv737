@@ -1,98 +1,20 @@
-using System;
-namespace factorialExample{
-    class programm{
-        static void Main(string[] args){
-            int number,fact=1,i;
-            Console.Write("enter any number");
-              number = int.Parse(Console.ReadLine());
-              for(i=1;i<=number;i++)
-              {
-                  fact=fact*i;
-              }
-              Console.WriteLine($"factorial of {number} is {fact}");
-              Console.ReadKey();
-              
-        }
-    }
-}
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn.datasets import load_iris
+iris = load_iris()
+data = pd.DataFrame(iris.data, columns=iris.feature_names)
+kmeans = KMeans(n_clusters=3, random_state=42, n_init=10).fit(data)
+print(pd.crosstab(iris.target, kmeans.labels_, rownames=['True Species'],
+colnames=['Cluster']))
+plt.scatter(data['sepal length (cm)'], data['sepal width (cm)'], c=kmeans.labels_,
+cmap='viridis', s=50)
+centroids = kmeans.cluster_centers_
+plt.scatter(centroids[:, 0], centroids[:, 1], c='red', marker='x', s=200,
+label='Centroids')
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('Sepal Width (cm)')
+plt.title('K-Means Clustering')
+plt.legend()
+plt.show()
 
-
-
-
-using System;
-
-class Program
-{
-    static void Main()
-    {
-        // Input from user
-        Console.Write("Enter a number: ");
-        double number = Convert.ToDouble(Console.ReadLine());
-
-        // Calculate the cube
-        double cube = Math.Pow(number, 3);
-
-        // Output the result
-        Console.WriteLine("The cube of {0} is {1}", number, cube);
-    }
-}
-
-
-
-
-using System;
-
-namespace FibonacciExample
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.Write("Enter the number of Fibonacci terms: ");
-            int number = int.Parse(Console.ReadLine());
-
-            int n1 = 0, n2 = 1, n3;
-
-            Console.Write(n1 + " " + n2 + " ");  // print first two terms
-
-            for (int i = 2; i < number; i++)
-            {
-                n3 = n1 + n2;
-                Console.Write(n3 + " ");
-                n1 = n2;
-                n2 = n3;
-            }
-
-            Console.ReadKey();
-        }
-    }
-}
-
-
-
-
-using System;
-
-namespace MoneyConversion
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            // Hardcoded conversion rate (e.g., 1 USD = 74.50 INR)
-            double conversionRate = 74.50;
-
-            // Get the amount in USD
-            Console.Write("Enter the amount in USD: ");
-            double amountInUSD = double.Parse(Console.ReadLine());
-
-            // Convert to INR
-            double amountInINR = amountInUSD * conversionRate;
-
-            // Display the result
-            Console.WriteLine($"{amountInUSD} USD is equivalent to {amountInINR} INR.");
-            
-            Console.ReadKey();
-        }
-    }
-}
