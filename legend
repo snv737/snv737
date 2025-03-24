@@ -1,69 +1,34 @@
-<html>
-<head>
-<title>User login</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-<form action="userloginServlet" method="post">
-           Enter your name:    <input type="text" name="uname"><br>
-           Enter your password:<input type="text" name="pwd"><br><br>
-<input type="submit" value="login">
-<input type="reset"  value="clear all">
-</form>
-</body>
-</html>
- 
-userloginServlet.java:-
- 
-public class userloginServlet extends HttpServlet {
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-           throws ServletException, IOException {
-       response.setContentType("text/html;charset=UTF-8");
-       try (PrintWriter out = response.getWriter()) {
-            String s1 = request.getParameter("uname");
-           String s2 = request.getParameter("pwd");
-           String right_name="admin";
-           String right_password="abc";
-           if(s1.equals(right_name))
-           {
-               if(s2.equals(right_password))
-               {
-                   out.println("Hello "+right_name);
-               }
-           }
-           else
-               out.println("Login Failed ");
-             }    }
+Step 1: Import Data from Data Warehouse to Excel
+1.Open Microsoft Excel.
+2.Go to the Data tab.
+3. From the drop-down menu, choose From Other Sources and
+select From Data Connection Wizard.
+4. select Microsoft From SQL Server or choose the relevant source for
+your data warehouse.
+5. Connect to database server provide connection (Server Name).
+6. Click Next and then Finish
 
+Step 2: Create a Pivot Chart
+1. Once you have the PivotTable set up, click anywhere inside the
+PivotTable.
+2. Select database and Table .
+3. Save data connections file and finish .
+4. Import data to select pivot chart and pivot table report.
+5. Choose the chart type you want to visualize your data (e.g.,
+Column, Line, Pie, etc.).
+6. Excel will generate the PivotChart based on the data in your
+PivotTable.
 
-
-
-
-
-
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Use of Intrinsic Objects</title>
-</head><body>
-<h1> Request Object</h1><br>
-       Query String <%= request.getQueryString() %><br>
-       Context Path <%= request.getContextPath() %><br>
-       Remote Host <%= request.getRemoteHost() %><br><br>
-<h1>Response Object</h1><br>
-       Character Encoding Type <%= response.getCharacterEncoding() %><br>
-       Content Type <%= response.getContentType() %><br>
-       Locale <%= response.getLocale() %><br><br>
-<h1>Session Object </h1><br>
-       ID<%= session.getId() %><br>
-       Creation Time <%= new java.util.Date(session.getCreationTime()) %><br>
-       Last Access Time <%= new java.util.Date(session.getLastAccessedTime()) %><br><br>
-<h1>Use of Out Object</h1><br>
-<% out.println("This is an example "); %><br><br>
-<h1>Use of Config Object</h1><br>
-<%=config.getServletName() %><br><br>
-</body></html>
+Step 3: Create a Pivot Table
+1. Once the data is imported, click anywhere inside the data range.
+2. Go to the Insert tab on the Ribbon.
+3. Click on PivotTable in the Tables group.
+4. You can also choose to place the PivotTable in a new worksheet or
+an existing one.
+5. Click OK to create the PivotTable.
+6. In the PivotTable Field List pane, drag fields into the Rows,
+Columns, Values, and Filters areas to organize the data. For
+example:
+a. Rows: Place dimensions like product names or regions.
+b. Columns: Place time periods (e.g., months or years).
+c. Values: Put numerical values like sales or revenue.
