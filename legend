@@ -1,34 +1,35 @@
-Step 1: Import Data from Data Warehouse to Excel
-1.Open Microsoft Excel.
-2.Go to the Data tab.
-3. From the drop-down menu, choose From Other Sources and
-select From Data Connection Wizard.
-4. select Microsoft From SQL Server or choose the relevant source for
-your data warehouse.
-5. Connect to database server provide connection (Server Name).
-6. Click Next and then Finish
+Part 2: Configure Local AAA Authentication for vty Lines on R1
+    Step 1: Configure domain name and crypto key for use with SSH.
+      a. Use ccnasecurity.com as the domain name on R1.
+      R1(config)# ip domain-name ccnasecurity.com
 
-Step 2: Create a Pivot Chart
-1. Once you have the PivotTable set up, click anywhere inside the
-PivotTable.
-2. Select database and Table .
-3. Save data connections file and finish .
-4. Import data to select pivot chart and pivot table report.
-5. Choose the chart type you want to visualize your data (e.g.,
-Column, Line, Pie, etc.).
-6. Excel will generate the PivotChart based on the data in your
-PivotTable.
+      b. Create an RSA crypto key using 1024 bits.
+      R1(config)# crypto key generate rsa
 
-Step 3: Create a Pivot Table
-1. Once the data is imported, click anywhere inside the data range.
-2. Go to the Insert tab on the Ribbon.
-3. Click on PivotTable in the Tables group.
-4. You can also choose to place the PivotTable in a new worksheet or
-an existing one.
-5. Click OK to create the PivotTable.
-6. In the PivotTable Field List pane, drag fields into the Rows,
-Columns, Values, and Filters areas to organize the data. For
-example:
-a. Rows: Place dimensions like product names or regions.
-b. Columns: Place time periods (e.g., months or years).
-c. Values: Put numerical values like sales or revenue.
+      Choose the size of the key modulus in the range of 360 to 2048 for your
+      General Purpose Keys. Choosing a key modulus greater than 512 may take
+       a few minutes.
+
+      How many bits in the modulus [512]: 1024
+      % Generating 1024 bit RSA keys, keys will be non-exportable...[OK] 
+     
+    Step 2
+       Configure a named list AAA authentication method for the vty lines on R1.
+
+      Configure a named list called SSH-LOGIN to authenticate logins using local AAA.
+      R1(config)# aaa authentication login SSH-LOGIN local
+
+   Step 3: Configure the vty lines to use the defined AAA authentication method.
+
+         Configure the vty lines to use the named AAA method and only allow SSH for remote access.
+          R1(config)# line vty 0 4
+          R1(config-line)# login authentication SSH-LOGIN
+          R1(config-line)# transport input ssh R1(config-line)#
+          end
+
+
+    Step 4: Verify the AAA authentication method.         
+            Verify the SSH configuration SSH to R1 from the command prompt of PC-A..
+                  PC> ssh –l Admin1 192.168.1.1
+                  Open
+                  Password: admin1pa5
